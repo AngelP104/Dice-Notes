@@ -1,0 +1,25 @@
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY requirements.txt /app/requirements.txt
+
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
+
+COPY . /app/
+
+# Crear usuario no root para seguridad
+RUN useradd -m django_user
+
+RUN chown -R django_user:django_user /app
+
+USER django_user
+
+# Ejecutar migraciones y collectstatic antes de iniciar el servidor
+# Esto lo hacemos en el CMD con un shell para que se ejecute al iniciar el contenedor
+
+EXPOSE 8000
+
+# Se ejecutan migraciones, el script de creación de registros base (superusuario, idiomas, rol jugador), se cargan archivos estáticos y se inicia la aplicacion con WebSockets
+CMD ["sh", "-c", "python manage.py migrate && python docker_create_base_data.py && python manage.py collectstatic --noinput && daphne -b 0.0.0.0 -p 8000 dicenotes.asgi:application"]

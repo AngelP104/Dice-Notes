@@ -1,0 +1,9 @@
+{% extends "base_generic.html"%}
+{% block content %}
+    <h1>Personaje List</h1>
+    <ul>
+        {% for personaje in personaje_list %}
+            <li>{{ personaje.nombre }} - {{ personaje.raza }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

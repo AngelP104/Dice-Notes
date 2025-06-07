@@ -1,0 +1,90 @@
+morado demasiado oscuro: #270a19
+morado muy oscuro: #3b1026
+morado casi muy oscuro: #4d1532
+morado oscuro: #571f3e
+morado medio: #752a53
+morado medio-claro: #833961
+morado claro: #92416e
+
+scroll: #f5f0dc
+marron madera: #75634b
+verdecito: #476b47
+
+DETECTAR SI EL USUARIO CON SESION INICIADA ES EL DM DE LA CAMPAÑA:
+if (perfil.id === campana.dungeon_master.user) {
+    ...
+  }
+
+A la hora de mostrar informacion diferente para el DM y para los jugadores, tengo 2 opciones:
+    1. Mostrar sólo la información diferente usando cada vez un if statement.
+
+    2. Haciendo un if general, envolver el fragmento o componente en ese if y mostrar 2 vistas diferentes.
+
+Si son sólo botones o alguna información extra que no altere la página completa, mostraré sólo
+
+¿Y si en vez de limitar quien puede entrar a una campaña, hago que cualquiera pueda verla pero no interactuar? Como si fuera un espectador.
+
+Si al cargar un componente no detecta a tiempo el perfil:
+if (!perfil || !perfil.user) return;
+
+---------------------------------------------------------------------
+HASTA AHORA ERA ASI, PERO HAY UN FALLO GORDO POR USAR FIREBASE UIDS EN URLS Y EN PETICIONES GET. ES MEJOR USAR UN TOKEN GENERADO POR FIREBASE Y PASARSELO EN LOS HEADERS. 
+
+PARA CUSTOMUSER QUIERO USAR UN UUID4 DE DJANGO COMO PK Y OBTENER EL FIREBASE_UID POR UN CHARFIELD, NO TENER EL UID DE FIREBASE COMO PK DE CUSTOMUSER. Esto esta sacado de reddit:
+
+You could follow these steps:
+
+  1. Modify the structure by introducing a new UUID field named differently from the current primary key, setting its default value to uuid.uuid4, and designating it as the new primary key.
+
+  2. makemigrations and migrate This will delete the existing I'd field and set the new primary key field.
+
+  3. Rename the new field to ID.
+
+
+antes de segundo paso:
+class CustomUser(AbstractUser):
+    firebase_uid = models.CharField(
+        max_length=128, unique=True, blank=True
+    )
+    
+    temp_uuid = models.CharField(
+        max_length=128,
+        default=uuid.uuid4, unique=True, primary_key=True
+    )  # UUID temporal para Firebase
+
+    def __str__(self):
+        return self.username
+
+
+
+                                                [RERP ENFR]
+                
+        [ ] kyo 20/20
+        [ ] arquierio                           vivo                       
+        [ ] guerrreo
+
+
+
+Variable entorno .env
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+...
+
+await fetch(`${API_BASE_URL}/api/logout/`, {
+  method: "POST",
+  headers: {
+    "Authorization": `Bearer ${user.getIdToken()}`,
+  },
+});
+
+"""
+'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dicenotes',
+        'USER': 'angelp104',
+        'PASSWORD': 'psqlap104',
+        'HOST': 'localhost',
+        'PORT': '5432',
+}
+"""

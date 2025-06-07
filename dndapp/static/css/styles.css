@@ -1,0 +1,67 @@
+.sidebar-nav {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+}
+
+#logout-form {
+    display: inline;
+}
+
+#logout-form button {
+    padding: 0;
+    margin: 0;
+}
+
+.muestraFichero {
+    font-size: 16px;
+    color: #333;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 80%;
+    margin: 20px auto;
+}
+
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 2px;
+}
+
+form {
+    background-color: antiquewhite;
+    max-width: fit-content;
+}
+
+.card-set {
+    display: flex;
+    overflow: auto;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+
+.card {
+    border: 2px solid black;
+    padding: 10px;
+    margin: 20px;
+    width: 300px;
+    min-height: 300px;
+}
+
+.card img {
+    width: 50px;
+    height: 50px;
+}
+
+.avatar {
+    border: 3px solid black;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+}

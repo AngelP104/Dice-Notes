@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+{%block content%}
+
+{% load static %}
+<img class="avatar" src="
+{% if perfil.avatar%}
+    {{perfil.avatar.url}}
+    {% else %}
+    {% static 'images/default_avatar.jpg' %}
+{% endif %}
+"/>
+<h1>Perfil: {{perfil.nombre_visible}}</h1>
+<p>{{perfil.biografia}}</p>
+
+<a href="{% url "modificarPerfil" perfil.pk %}"><button>Editar</button></a>
+<a href="{% url "formularioPersonaje" perfil.pk %}"><button>Crear personaje</button></a>
+
+{%endblock%}

@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>Eliminar campaña</h1>
+
+<p>¿Seguro que quieres eliminar esta campaña?</p>
+<div>
+<h3>{{campana.titulo}}</h3>
+<p>{{campana.info}}</p>
+</div>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" action="" value="Yes, delete." />
+</form>
+
+{% endblock %}

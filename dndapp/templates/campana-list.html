@@ -1,0 +1,36 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<h1>Campañas</h1>
+
+
+{% if user.is_authenticated %}
+<a href="{% url "formularioCampana" %}"><button>Crear Campaña</button></a>
+{% endif %}
+<hr/>
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<div class="card-set">
+{% for campana in campana_list %}
+<div class="card">
+<h3>{{campana.titulo}}</h3>
+<p>{{campana.info}}</p>
+<p>Creada por <a href="{% url "perfil-detail" campana.dungeon_master.pk %}"</a>{{campana.dungeon_master.nombre_visible}}</p>
+
+
+<div>
+<a href="{% url "campana-detail" campana.pk %}" class="enter"><button>Entrar</button></a>
+</div>
+</div>
+{% endfor %}
+</div>
+
+
+
+{% endblock %}

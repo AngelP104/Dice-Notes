@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+
+@theme {
+    --color-tyrian-700: "#5e1f3e";
+}

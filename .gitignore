@@ -1,0 +1,5 @@
+.env
+.env.docker
+*.sqlite3
+__pycache__/
+firebase_config.json

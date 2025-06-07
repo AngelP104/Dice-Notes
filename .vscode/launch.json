@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "chrome",
+            "name": "http://localhost:5173/campanas/1/encuentros/crear/",
+            "request": "launch",
+            "url": "http://localhost:5173/campanas/1/encuentros/crear/"
+        }
+    ]
+}

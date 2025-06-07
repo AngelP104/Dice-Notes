@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<h1>Dice & Notes</h1>
+<p>Bienvenido a la aplicación de gestión de partidas de rol.</p>
+<p>Para empezar, puedes:</p>
+<ul>
+    <li><a href="{% url 'campana-list' %}">Ver las campañas disponibles</a></li>
+</ul>
+<p>Si eres el Dungeon Master de una campaña, puedes:</p>
+<ul>
+    <li><a href="{% url 'formularioCampana' %}">Crear una nueva campaña</a></li>
+</ul>
+<p>Si eres un jugador, puedes:</p>
+<ul>
+    {% comment "" %}
+    <li><a href="{% url 'formularioPersonaje' request.user.perfil.pk %}">Crear un nuevo personaje</a></li>
+    {% endcomment %}
+</ul>
+
+{% endblock %}
