@@ -191,9 +191,8 @@ if DEBUG:
         "http://localhost:3000",
     ]
 else:
-    CORS_ALLOWED_ORIGINS += os.environ.get("CORS_ALLOWED_ORIGINS")  # cambia esto por tu dominio real
-    
-    CSRF_TRUSTED_ORIGINS += os.environ.get("CSRF_TRUSTED_ORIGINS") # esto también
+    CORS_ALLOWED_ORIGINS += json.loads(os.environ.get("CORS_ALLOWED_ORIGINS", "[]")) # cambia esto por tu dominio real
+    CSRF_TRUSTED_ORIGINS += json.loads(os.environ.get("CSRF_TRUSTED_ORIGINS", "[]")) # esto también
     
 # CORS_ALLOWED_ORIGINS = [
 #     "http://127.0.0.1:5173", # URL de React
@@ -246,7 +245,7 @@ CHANNEL_LAYERS = {
     },
 }
 
-FIREBASE_CONFIG = os.path.join(BASE_DIR, 'firebase_config.json')
+#FIREBASE_CONFIG = os.path.join(BASE_DIR, 'firebase_config.json')
 AUTH_USER_MODEL = 'firebase_auth.CustomUser'
 
 REST_FRAMEWORK = {
