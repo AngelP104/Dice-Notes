@@ -191,8 +191,8 @@ if DEBUG:
         "http://localhost:3000",
     ]
 else:
-    CORS_ALLOWED_ORIGINS +=  [os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")]
-    CSRF_TRUSTED_ORIGINS += [os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")]
+    CORS_ALLOWED_ORIGINS += os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
+    CSRF_TRUSTED_ORIGINS += os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
