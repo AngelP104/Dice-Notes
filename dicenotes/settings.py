@@ -192,10 +192,10 @@ if DEBUG:
     ]
 else:
     CORS_ALLOWED_ORIGINS += [
-        os.environ.get("CORS_ALLOWED_ORIGINS"),  # cambia esto por tu dominio real
+        os.environ.get("CORS_ALLOWED_ORIGINS")  # cambia esto por tu dominio real
     ]
     CSRF_TRUSTED_ORIGINS += [
-        os.environ.get("CSRF_TRUSTED_ORIGINS"),
+        os.environ.get("CSRF_TRUSTED_ORIGINS")
     ]
 # CORS_ALLOWED_ORIGINS = [
 #     "http://127.0.0.1:5173", # URL de React
