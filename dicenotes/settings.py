@@ -10,12 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import json
 import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
 
 from dotenv import load_dotenv
-import firebase_config
 import dj_database_url
 
 load_dotenv()
@@ -61,9 +61,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -191,31 +191,8 @@ if DEBUG:
         "http://localhost:3000",
     ]
 else:
-    CORS_ALLOWED_ORIGINS += [
-        os.environ.get("CORS_ALLOWED_ORIGINS"),  # cambia esto por tu dominio real
-    ]
-    CSRF_TRUSTED_ORIGINS += [
-        os.environ.get("CSRF_TRUSTED_ORIGINS"),
-    ]
-# CORS_ALLOWED_ORIGINS = [
-#     "http://127.0.0.1:5173", # URL de React
-#     "http://localhost:5173",
-#     "http://127.0.0.1:6379", # Puerto donde corre Redis
-#     "http://localhost:6379",
-# ]
-
-# # Permitir solo desde el frontend (seguro para producción)
-# # CORS_ALLOWED_ORIGINS = [
-# #     "http://localhost:3000",  # URL de tu React frontend
-# # ]
-
-# CSRF_TRUSTED_ORIGINS = [
-#     "http://127.0.0.1:5173", # URL de React
-#     "http://localhost:5173",
-#     "http://127.0.0.1:3000", # Puerto donde corre Redis
-#     "http://localhost:3000",
-# ]
-
+    CORS_ALLOWED_ORIGINS +=  [os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")]
+    CSRF_TRUSTED_ORIGINS += [os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -248,7 +225,7 @@ CHANNEL_LAYERS = {
     },
 }
 
-FIREBASE_CONFIG = os.path.join(BASE_DIR, 'firebase_config.json')
+#FIREBASE_CONFIG = os.path.join(BASE_DIR, 'firebase_config.json')
 AUTH_USER_MODEL = 'firebase_auth.CustomUser'
 
 REST_FRAMEWORK = {
