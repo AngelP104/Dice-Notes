@@ -15,14 +15,12 @@ default_app = firebase_admin.initialize_app(cred)
 
 import os
 import json
-from firebase_admin import credentials, initialize_app
+from firebase_admin import credentials
 
-firebase_creds = os.environ.get('FIREBASE_CONFIG')
+firebase_config_json = os.environ.get('FIREBASE_CONFIG')
 
-if os.environ.get("FIREBASE_CONFIG"):
-    firebase_dict = json.loads(os.environ["FIREBASE_CONFIG"])
-    cred = credentials.Certificate(firebase_dict)
+if firebase_config_json:
+    firebase_config_dict = json.loads(firebase_config_json)
+    cred = credentials.Certificate(firebase_config_dict)
 else:
-    cred = credentials.Certificate("firebase_config.json")
-
-firebase_app = initialize_app(cred)
+    raise Exception("FIREBASE_CONFIG no encontrada")
