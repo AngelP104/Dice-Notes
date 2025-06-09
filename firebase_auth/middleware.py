@@ -1,3 +1,4 @@
+import firebase_config
 from django.contrib.auth.models import AnonymousUser
 from urllib.parse import parse_qs
 from firebase_admin import auth as firebase_auth

@@ -10,11 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import firebase_config
 import json
 import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
-
+import firebase_admin
+import firebase_auth
 from dotenv import load_dotenv
 import dj_database_url
 
