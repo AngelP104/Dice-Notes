@@ -302,7 +302,7 @@ export const CampanaDetail = () => {
                 {jugadorEstaEnCampana && (
                   <div>
                     <p className="font-semibold underline text-lg mt-6">Notas Generales</p>
-                    <NotaList model="campana" objectId={campanaId} />
+                    <NotaList model="campana" objectId={campanaId} dungeonMaster={campana.dungeon_master}/>
                   </div>
                 )}
 

@@ -68,7 +68,7 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const response = await fetch(`http://localhost:8000/api/campanas/${campanaId}/encuentros/${encuentroId}/comenzar/`, {
+                    const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/${encuentroId}/comenzar/`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -110,7 +110,7 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const response = await fetch(`http://localhost:8000/api/campanas/${campanaId}/encuentros/${encuentroId}/finalizar/`, {
+                    const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/${encuentroId}/finalizar/`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -150,7 +150,7 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const response = await fetch(`http://localhost:8000/api/campanas/${campanaId}/encuentros/${encuentroId}/programar/`, {
+                    const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/${encuentroId}/programar/`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -184,7 +184,7 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
                 try {
                     if (cerrarDetalle) cerrarDetalle();
 
-                    const response = await fetch(`http://localhost:8000/api/campanas/${campanaId}/encuentros/${encuentroId}/`, {
+                    const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/${encuentroId}/`, {
                         method: "DELETE",
                         headers: {
                             "Content-Type": "application/json",
@@ -226,7 +226,7 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
 
     const cambiarTurno = async (numTurno) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/campanas/${campanaId}/encuentros/${encuentroId}/turno/${numTurno}/`, {
+            const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/${encuentroId}/turno/${numTurno}/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -316,7 +316,7 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
     // Actualizar dato estado participante
     const actualizarParticipante = async (participanteId, datosActualizados) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/campanas/${campanaId}/encuentros/${encuentroId}/participantes/${participanteId}/`, {
+            const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/${encuentroId}/participantes/${participanteId}/`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -338,7 +338,7 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
 
     const actualizarVidaPersonaje = async (personajeId, vitalidad_actual) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/personajes/${personajeId}/`, {
+            const response = await fetch(`${API_BASE_URL}/api/personajes/${personajeId}/`, {
                 method: "PATCH",
                 headers: {
                     Authorization: `Bearer ${user.accessToken}`,

@@ -6,7 +6,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const WS_BASE_URL = import.meta.env.VITE_WS_BASE_URL;
 
 
-export const NotaList = ({ model, objectId }) => {
+export const NotaList = ({ model, objectId, dungeonMaster }) => {
     const socketRef = useRef(null);
     const [notas, setNotas] = useState([]);
     const { user, perfil } = usePerfil();
@@ -275,6 +275,7 @@ export const NotaList = ({ model, objectId }) => {
                                     onDrop={() => handleDrop(idx)}
                                     isDragging={draggedIndex === idx}
                                     autoFocus={nota.id === ultimaNotaCreada}
+                                    dungeonMaster={dungeonMaster}
                                 />
                             </div>
                         ))}

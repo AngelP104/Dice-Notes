@@ -71,7 +71,7 @@ export const Perfil = () => {
 
     useEffect(() => {
         fetchInfoPerfil();
-    }, [])
+    }, [perfilVisionado])
 
     // Setear el formulario una vez que perfilVisionado se cargue
     useEffect(() => {

@@ -230,8 +230,6 @@ CHANNEL_LAYERS = {
     },
 }
 
-#FIREBASE_CONFIG = os.path.join(BASE_DIR, 'firebase_config.json')
-#FIREBASE_CONFIG = os.path.join(BASE_DIR, 'firebase_config.json')
 AUTH_USER_MODEL = 'firebase_auth.CustomUser'
 
 REST_FRAMEWORK = {

@@ -43,7 +43,7 @@ export const CrearInvitacion = ({ show, onClose, campanaId }) => {
                     <div className="mb-4 flex flex-col sm:flex-row items-center justify-center">
                         {copiado ? (
                             <>
-                            <p className="mb-2 sm:mb-0 sm:mr-2 text-sm break-all ring rounded ring-gray-700 p-2 truncate">{codigo}</p>
+                            <p className="mb-2 sm:mb-0 sm:mr-2 text-sm break-all ring rounded ring-gray-700 p-2">{codigo}</p>
                             <button
                                 onClick={copiarAlPortapapeles}
                                 className="text-white px-3 py-2 rounded bg-green-500 transition flex items-center cursor-pointer ring-green-600 ring-2"
@@ -53,7 +53,7 @@ export const CrearInvitacion = ({ show, onClose, campanaId }) => {
                         </>
                         ) : (
                             <>
-                                <p className="mb-2 sm:mb-0 sm:mr-2 text-sm break-all ring rounded ring-gray-700 p-2 truncate">{codigo}</p>
+                                <p className="mb-2 sm:mb-0 sm:mr-2 text-sm break-all ring rounded ring-gray-700 p-2 ">{codigo}</p>
                                 <button
                                     onClick={copiarAlPortapapeles}
                                     className="bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 transition flex items-center cursor-pointer"

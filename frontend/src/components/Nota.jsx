@@ -5,7 +5,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const Nota = ({
     nota, actualizarTipo, actualizarContenido, eliminarNota,
-    onDragStart, onDragOver, onDragEnd, onDrop, isDragging, autoFocus
+    onDragStart, onDragOver, onDragEnd, onDrop, isDragging, autoFocus, dungeonMaster
 }) => {
     const TIEMPO_ACTUALIZACION = 1000; // 1 segundo
 
@@ -97,7 +97,7 @@ export const Nota = ({
                         </div>
                     )}
                     <p className="flex items-center text-sm text-gray-400 mr-3  text-ellipsis select-none">
-                        <img src={nota.creador.avatar} className="w-6 h-6 rounded-full mr-1 border-1 border-white"
+                        <img src={nota.creador.avatar} className="w-6 h-6 rounded-full mr-1 border-1 border-white bg-gray-300"
                             draggable="false"
                         />
 
@@ -105,8 +105,7 @@ export const Nota = ({
                     </p>
 
                 </div>
-                {nota.creador.user === perfil.id && (
-
+                {(nota.creador.user === perfil.id || dungeonMaster.user === perfil.id) && (
                     <button
                         onClick={() => eliminarNota(nota.id)}
                         className="text-red-500 hover:text-red-400 px-3 cursor-pointer rounded-full"

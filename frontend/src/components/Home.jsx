@@ -41,7 +41,7 @@ export const Home = () => {
             <i className="fa-sharp fa-dice-d20 text-5xl rotate-15 text-red-500 mb-2"></i>
 
             <p className="text-center text-4xl lg:text-5xl font-semibold text-red-500 font-serif">Dice & Notes</p>
-            <span className="text-md text-gray-300">v1.0</span>
+            <span className="text-md text-gray-300">v1.0.1</span>
           </div>
         </header>
 

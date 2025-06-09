@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePerfil } from "../context/PerfilContext";
+import Swal from "sweetalert2";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 // Pantalal de creación de campaña
@@ -31,6 +32,32 @@ export const CampanaCreate = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Validación de la imagen
+        if (form.imagen) {
+            const file = form.imagen;
+            const validTypes = ["image/jpeg", "image/png", "image/jpg"];
+
+            if (!validTypes.includes(file.type)) {
+                Swal.fire({
+                    text: "Solo se admiten archivos JPG, JPEG o PNG.",
+                    theme: "dark",
+                    showConfirmButton: false,
+                    icon: "error",
+                });
+                return;
+            }
+
+            if (file.name.length > 100) {
+                Swal.fire({
+                    text: "El nombre del archivo es demasiado largo (máx. 100 caracteres).",
+                    theme: "dark",
+                    showConfirmButton: false,
+                    icon: "error",
+                });
+                return;
+            }
+        }
 
         const formDataToSubmit = new FormData();
         formDataToSubmit.append("nombre", form.nombre);
@@ -104,7 +131,7 @@ export const CampanaCreate = () => {
                     <input
                         type="file"
                         name="imagen"
-                        accept="image/*"
+                        accept="image/png, image/jpeg, image/jpg"
                         onChange={handleFileChange}
                         className="mt-1 block w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:text-sm file:font-semibold file:bg-emerald-600 file:border-2 file:text-white hover:file:bg-emerald-700 file:cursor-pointer transition"
                     />
@@ -112,7 +139,7 @@ export const CampanaCreate = () => {
                         <img
                             src={imagenPreview}
                             alt="Vista previa"
-                            className="mt-2 max-h-32 rounded-xl border-2 "
+                            className="mt-2 max-h-32 rounded-xl border-2 bg-gray-300"
                         />
                     )}
                 </div>

@@ -37,7 +37,7 @@ export const Navbar = () => {
           <NavLink to="/">
             <div className="flex items-center space-x-2">
               <i className="fa-solid fa-dice-d20 text-2xl rotate-15 text-white"></i>
-              <h1 className="text-xl font-bold tracking-wide select-none">Dice & Notes</h1>
+              <h1 className="text-xl font-semibold tracking-wide select-none">Dice & Notes</h1>
             </div>
           </NavLink>
 

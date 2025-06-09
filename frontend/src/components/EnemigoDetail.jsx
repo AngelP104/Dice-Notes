@@ -166,8 +166,32 @@ export const EnemigoDetail = () => {
     }
     const form = new FormData();
     for (const key in formData) {
+      // Validación de la imagen
       if (key === "imagen" && formData.imagen instanceof File) {
-        form.append("imagen", formData.imagen);
+        const file = formData.imagen;
+        const validTypes = ["image/jpeg", "image/png", "image/jpg"];
+    
+        if (!validTypes.includes(file.type)) {
+          Swal.fire({
+            text: "Solo se admiten archivos JPG, JPEG o PNG.",
+            theme: "dark",
+            showConfirmButton: false,
+            icon: "error",
+          });
+          return;
+        }
+    
+        if (file.name.length > 100) {
+          Swal.fire({
+            text: "El nombre del archivo es demasiado largo (máx. 100 caracteres).",
+            theme: "dark",
+            showConfirmButton: false,
+            icon: "error",
+          });
+          return;
+        }
+    
+        form.append("imagen", file);
       } else if (key === "idiomas") {
         formData.idiomas.forEach(idiomaId => form.append("idiomas_ids", idiomaId));
         //} 
@@ -347,7 +371,10 @@ export const EnemigoDetail = () => {
                 }
               </p>
               <p>
-                <strong>Bono de competencia:</strong> <span className="text-yellow-400 font-bold">{enemigo.bono_competencia}</span>
+              <strong>Puntaje: </strong><span>{enemigo.puntaje}</span>
+              </p>
+              <p>
+                <strong>Bono de competencia: </strong><span className="text-yellow-400 font-bold">{enemigo.bono_competencia}</span>
               </p>
             </div>
 
@@ -410,9 +437,12 @@ export const EnemigoDetail = () => {
               </div>
 
             </div>
-
-            <p className="font-semibold underline text-lg mt-6">Notas del enemigo</p>
-            <NotaList model="enemigo" objectId={id} />
+            {perfil.id === enemigo.creador.user && (
+              <div>
+            <p className="font-semibold underline text-lg mt-6">Tus notas privadas sobre el enemigo</p>
+              <NotaList model="enemigo" objectId={id} />
+              </div>
+            )}
 
 
 
@@ -435,7 +465,7 @@ export const EnemigoDetail = () => {
                 <input
                   type="file"
                   name="imagen"
-                  accept="image/*"
+                  accept="image/png, image/jpeg, image/jpg"
                   onChange={handleInputChange}
                   className="bg-[#291325] p-2 rounded-lg w-full"
                 />
