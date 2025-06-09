@@ -3,15 +3,15 @@ import json
 import firebase_admin
 from firebase_admin import credentials
 
-def initialize_firebase():
-    if not firebase_admin._apps:
-        config = os.environ.get("FIREBASE_CONFIG")
-        if not config:
-            raise Exception("FIREBASE_CONFIG no encontrada")
+if not firebase_admin._apps:
+    firebase_config_json = os.environ.get('FIREBASE_CONFIG')
 
-        try:
-            config_dict = json.loads(config)
-            cred = credentials.Certificate(config_dict)
-            firebase_admin.initialize_app(cred)
-        except Exception as e:
-            raise Exception("Error al inicializar Firebase:", str(e))
+    if not firebase_config_json:
+        raise Exception("FIREBASE_CONFIG no encontrada")
+
+    try:
+        firebase_config_dict = json.loads(firebase_config_json)
+        cred = credentials.Certificate(firebase_config_dict)
+        default_app = firebase_admin.initialize_app(cred)
+    except json.JSONDecodeError:
+        raise ValueError("FIREBASE_CONFIG malformado. Asegúrate de que es JSON válido.")
