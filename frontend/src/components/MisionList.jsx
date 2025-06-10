@@ -12,9 +12,10 @@ export const MisionList = ({ campanaId, dungeonMaster }) => {
     useEffect(() => {
         const fetchMisiones = async () => {
             try {
+                const token = await user.getIdToken();
                 const res = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/misiones/`, {
                     headers: {
-                        Authorization: `Bearer ${user.accessToken}`,
+                        Authorization: `Bearer ${token}`,
                     },
                 });
                 if (!res.ok) throw new Error("Error al cargar misiones");

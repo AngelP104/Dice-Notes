@@ -16,24 +16,25 @@ export const EncuentroList = ({ campanaId, dungeonMaster, party }) => {
     const [loading, setLoading] = useState(true);
     const [encuentroActual, setEncuentroActual] = useState(null);
 
-    useEffect(() => {
-        const fetchEncuentros = async () => {
-            try {
-                const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/`, {
-                    headers: {
-                        Authorization: `Bearer ${user.accessToken}`,
-                    },
-                });
-                if (!response.ok) throw new Error("No se pudieron cargar los encuentros");
-                const data = await response.json();
-                setEncuentros(data);
-            } catch (error) {
-                console.error(error.message);
-            } finally {
-                setLoading(false);
-            }
-        };
+    const fetchEncuentros = async () => {
+        try {
+            const token = await user.getIdToken();
+            const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            if (!response.ok) throw new Error("No se pudieron cargar los encuentros");
+            const data = await response.json();
+            setEncuentros(data);
+        } catch (error) {
+            console.error(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
 
+    useEffect(() => {
         fetchEncuentros();
     }, [campanaId, encuentroActual]);
 
@@ -60,6 +61,11 @@ export const EncuentroList = ({ campanaId, dungeonMaster, party }) => {
         }
     });
 
+    const recargarListaEncuentros = () => {
+        setEncuentroActual(null)
+        fetchEncuentros()
+    }
+
     if (loading) return <LoadingComponent />;
 
     return (
@@ -69,7 +75,7 @@ export const EncuentroList = ({ campanaId, dungeonMaster, party }) => {
                     <p className="hover:underline cursor-pointer text-lg w-fit mb-2" onClick={() => setEncuentroActual(null)}>
                         <i className="fa-solid fa-arrow-left" ></i>{" "}Volver a la lista de encuentros
                     </p>
-                    <EncuentroDetail party={party} encuentroId={encuentroActual} campanaId={campanaId} dungeonMaster={dungeonMaster} cerrarDetalle={() => setEncuentroActual(null)} />
+                    <EncuentroDetail party={party} encuentroId={encuentroActual} campanaId={campanaId} dungeonMaster={dungeonMaster} cerrarDetalle={() => recargarListaEncuentros()} />
                 </>
             ) : (
                 <>

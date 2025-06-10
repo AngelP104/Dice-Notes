@@ -28,10 +28,11 @@ export const VitalidadPersonaje = ({ personaje, setPersonaje, esCreador, dungeon
         nuevoValor = Math.max(0, Math.min(personaje.vitalidad_maxima, nuevoValor));
 
         try {
+                const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/personajes/${personaje.id}/`, {
                 method: "PATCH",
                 headers: {
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ vitalidad_actual: nuevoValor }),

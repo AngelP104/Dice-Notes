@@ -61,8 +61,9 @@ export const PersonajeCreate = () => {
     useEffect(() => {
         const fetchIdiomas = async () => {
             try {
+                const token = await user.getIdToken();
                 const response = await fetch(`${API_BASE_URL}/api/idiomas/`, {
-                    headers: { Authorization: `Bearer ${user.accessToken}` },
+                    headers: { Authorization: `Bearer ${token}` },
                 });
                 if (!response.ok) throw new Error("No se pudieron obtener los idiomas");
                 const data = await response.json();
@@ -159,10 +160,11 @@ export const PersonajeCreate = () => {
         }
 
         try {
+                const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/mis-personajes/crear/`, {
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
                 body: form,
             });

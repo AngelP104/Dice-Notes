@@ -19,9 +19,10 @@ export const MisCampanas = () => {
     const fetchCampanas = async () => {
         if (!perfil || !user) return;
         try {
+                const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/mis-campanas/${perfil.id}/`, {
                 headers: {
-                    Authorization: `Bearer ${user.accessToken}`, // Token de Django
+                    Authorization: `Bearer ${token}`, // Token de Django
                 },
             });
             if (!response.ok) throw new Error("Error al cargar las campañas. Refresca la página.");

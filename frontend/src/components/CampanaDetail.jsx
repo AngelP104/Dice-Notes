@@ -52,9 +52,10 @@ export const CampanaDetail = () => {
     const fetchPerfiles = async () => {
       if (!perfil || !user) return;
       try {
+        const token = await user.getIdToken();
         const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/party/`, {
           headers: {
-            Authorization: `Bearer ${user.accessToken}`,
+            Authorization: `Bearer ${token}`,
           }
         });
         if (!response.ok) throw new Error("No se pudieron cargar los perfiles");
@@ -70,9 +71,10 @@ export const CampanaDetail = () => {
 
   const fetchCampana = async () => {
     try {
+      const token = await user.getIdToken();
       const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/`, {
         headers: {
-          Authorization: `Bearer ${user.accessToken}`,
+          Authorization: `Bearer ${token}`,
         }
       });
       if (!response.ok) throw new Error("Campaña no encontrada");
@@ -179,12 +181,13 @@ export const CampanaDetail = () => {
   // Eliminar jugador de la party
   const deletePlayer = async (perfilId) => {
     try {
+      const token = await user.getIdToken();
       // Realiza la solicitud DELETE al servidor
       const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/party/${perfilId}/delete/`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${user.accessToken}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -195,9 +198,10 @@ export const CampanaDetail = () => {
       // Recarga la lista de jugadores de la party
 
       try {
+                const token = await user.getIdToken();
         const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/party/`, {
           headers: {
-            Authorization: `Bearer ${user.accessToken}`,
+            Authorization: `Bearer ${token}`,
           }
         });
         if (!response.ok) throw new Error("No se pudieron cargar los perfiles");
@@ -302,7 +306,7 @@ export const CampanaDetail = () => {
                 {jugadorEstaEnCampana && (
                   <div>
                     <p className="font-semibold underline text-lg mt-6">Notas Generales</p>
-                    <NotaList model="campana" objectId={campanaId} dungeonMaster={campana.dungeon_master}/>
+                    <NotaList model="campana" objectId={campanaId} dungeonMaster={campana.dungeon_master} />
                   </div>
                 )}
 

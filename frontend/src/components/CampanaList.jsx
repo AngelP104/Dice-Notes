@@ -18,9 +18,10 @@ export const CampanaList = () => {
   const fetchCampanas = async () => {
 
     try {
+      const token = await user.getIdToken();
       const response = await fetch(`${API_BASE_URL}/api/campanas/`, {
         headers: {
-          Authorization: `Bearer ${user.accessToken}`, // Token de Django
+          Authorization: `Bearer ${token}`, // Token de Firebase
         },
       });
       if (!response.ok) throw new Error("Error al cargar las campañas");

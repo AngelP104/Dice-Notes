@@ -6,7 +6,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const WS_BASE_URL = import.meta.env.VITE_WS_BASE_URL;
 
 
-export const NotaList = ({ model, objectId, dungeonMaster }) => {
+export const NotaList = ({ model, objectId, dungeonMaster = null }) => {
     const socketRef = useRef(null);
     const [notas, setNotas] = useState([]);
     const { user, perfil } = usePerfil();
@@ -39,9 +39,10 @@ export const NotaList = ({ model, objectId, dungeonMaster }) => {
 
     const fetchNotas = async () => {
         try {
+                const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/notas/?content_type=${model}&object_id=${objectId}`, {
                 headers: {
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
 
@@ -115,11 +116,12 @@ export const NotaList = ({ model, objectId, dungeonMaster }) => {
 
     const agregarNota = async () => {
         try {
+                const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/notas/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({
                     contenido: '',
@@ -155,10 +157,11 @@ export const NotaList = ({ model, objectId, dungeonMaster }) => {
 
     const eliminarNota = async (id) => {
         try {
+                const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/notas/${id}/`, {
                 method: 'DELETE',
                 headers: {
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
 
@@ -180,11 +183,12 @@ export const NotaList = ({ model, objectId, dungeonMaster }) => {
 
     const actualizarTipoNota = async (id, tipo) => {
         try {
+                const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/notas/${id}/`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({ tipo }),
             });
@@ -210,11 +214,12 @@ export const NotaList = ({ model, objectId, dungeonMaster }) => {
 
     const actualizarContenidoNota = async (id, contenido) => {
         try {
+                const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/notas/${id}/`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({ contenido }),
             });

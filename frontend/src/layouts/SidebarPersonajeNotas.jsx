@@ -15,7 +15,7 @@ export const SidebarPersonajeNotas = ({ personaje, dungeonMaster }) => {
         <p className='font-semibold underline'>
         Notas de {personaje.nombre}
         </p>
-        <NotaList model="personaje" objectId={personaje.id} />
+        <NotaList model="personaje" objectId={personaje.id} dungeonMaster={""}/>
         </>
       ) : (
         <>

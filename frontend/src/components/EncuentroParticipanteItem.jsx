@@ -75,7 +75,7 @@ export const EncuentroParticipanteItem = ({ p, esPersonaje, nombre, perfil, dung
         }
     };
 
-    
+
     const calcularModificador = (stat) => Math.floor((stat - 10) / 2);
 
     return (
@@ -105,9 +105,10 @@ export const EncuentroParticipanteItem = ({ p, esPersonaje, nombre, perfil, dung
                         </div>
                         <div className="mr-2 flex flex-col items-center justify-between">
                             <img
-                                src={`${(esPersonaje ? p.personaje.imagen : p.enemigo.imagen).startsWith(`${API_BASE_URL}`)
-                                    ? (esPersonaje ? p.personaje.imagen : p.enemigo.imagen)
-                                    : `${API_BASE_URL}${esPersonaje ? p.personaje.imagen : p.enemigo.imagen}`}`}
+                                src={`${(esPersonaje ? p.personaje.imagen : p.enemigo.imagen).startsWith("http")
+                                        ? (esPersonaje ? p.personaje.imagen : p.enemigo.imagen)
+                                        : `${API_BASE_URL}${esPersonaje ? p.personaje.imagen : p.enemigo.imagen}`
+                                    }`}
                                 className="w-18 h-18 rounded-lg border-4 shadow-lg shadow-black/40 not-sm:w-12 not-sm:h-12 not-sm:rounded-md not-sm:border-3 not-sm:shadow-md bg-gray-200 object-cover"
                                 style={{
                                     borderColor: esPersonaje ? p.personaje.color_token || "gray" : "#ff2222"

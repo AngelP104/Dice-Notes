@@ -16,9 +16,10 @@ export const EncuentroPanel = ({ dungeonMaster, campanaId, encuentroId, party })
     // Obtener encuentros activos
     const fetchEncuentrosActivos = async () => {
         try {
+                const token = await user.getIdToken();
             const res = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/activos/`, {
                 headers: {
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
 
@@ -40,7 +41,7 @@ export const EncuentroPanel = ({ dungeonMaster, campanaId, encuentroId, party })
 
     useEffect(() => {
         fetchEncuentrosActivos();
-    }, [campanaId, user?.accessToken]);
+    }, [campanaId]);
 
 
     // Cuando el usuario selecciona un encuentro
@@ -48,11 +49,12 @@ export const EncuentroPanel = ({ dungeonMaster, campanaId, encuentroId, party })
         console.log("campanaId:", campanaId);
         console.log("encuentroId:", encuentroId);
         try {
+                const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/${encuentroId}/comenzar/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
             if (!response.ok) throw new Error("Error al iniciar encuentro");

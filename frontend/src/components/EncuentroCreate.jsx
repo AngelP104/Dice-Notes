@@ -20,12 +20,13 @@ export const EncuentroCreate = () => {
     useEffect(() => {
         // Se obtienen los personajes y los enemigos a seleccionar
         const fetchParticipantes = async () => {
+            const token = await user.getIdToken();
             const [resPersonajes, resEnemigos] = await Promise.all([
                 fetch(`${API_BASE_URL}/api/campanas/${campanaId}/party/`, {
-                    headers: { Authorization: `Bearer ${user.accessToken}` },
+                    headers: { Authorization: `Bearer ${token}` },
                 }),
                 fetch(`${API_BASE_URL}/api/enemigos/`, {
-                    headers: { Authorization: `Bearer ${user.accessToken}` },
+                    headers: { Authorization: `Bearer ${token}` },
                 }),
             ]);
 
@@ -93,11 +94,12 @@ export const EncuentroCreate = () => {
     const handleCrearEncuentro = async (e) => {
         e.preventDefault();
         try {
+                const token = await user.getIdToken();
             // Se crea el encuentro
             const res = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/crear/`, {
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ nombre, campana: campanaId }),
@@ -124,10 +126,12 @@ export const EncuentroCreate = () => {
             console.log(participantes)
 
             for (const participante of participantes) {
+
+                const token = await user.getIdToken();
                 const resPart = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/${encuentro.id}/participantes/crear/`, {
                     method: "POST",
                     headers: {
-                        Authorization: `Bearer ${user.accessToken}`,
+                        Authorization: `Bearer ${token}`,
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify(participante),

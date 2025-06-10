@@ -22,8 +22,9 @@ export const AjustesCampana = ({ campanaId, onUpdateInfo }) => {
     useEffect(() => {
         async function fetchCampana() {
             try {
+                const token = await user.getIdToken();
                 const res = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/`, {
-                    headers: { Authorization: `Bearer ${user.accessToken}` },
+                    headers: { Authorization: `Bearer ${token}` },
                 });
                 if (!res.ok) throw new Error("Error al cargar la campaña");
                 const data = await res.json();
@@ -75,10 +76,11 @@ export const AjustesCampana = ({ campanaId, onUpdateInfo }) => {
 
         if (result.isConfirmed) {
             try {
+                const token = await user.getIdToken();
                 const res = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/`, {
                     method: "DELETE",
                     headers: {
-                        Authorization: `Bearer ${user.accessToken}`,
+                        Authorization: `Bearer ${token}`,
                     },
                 });
 
@@ -145,10 +147,11 @@ export const AjustesCampana = ({ campanaId, onUpdateInfo }) => {
         }
 
         try {
+                const token = await user.getIdToken();
             const res = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/`, {
                 method: "PATCH",
                 headers: {
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
                 body: formData,
             });

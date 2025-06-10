@@ -21,9 +21,10 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
 
     const fetchEncuentro = async () => {
         try {
+                const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/${encuentroId}/`, {
                 headers: {
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
             if (!response.ok) throw new Error("Error al obtener el encuentro");
@@ -68,11 +69,12 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
+                    const token = await user.getIdToken();
                     const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/${encuentroId}/comenzar/`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
-                            "Authorization": `Bearer ${user.accessToken}`,
+                            "Authorization": `Bearer ${token}`,
                         },
                     })
                     if (!response.ok) throw new Error("No se pudo empezar el encuentro")
@@ -110,11 +112,12 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
+                    const token = await user.getIdToken();
                     const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/${encuentroId}/finalizar/`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
-                            "Authorization": `Bearer ${user.accessToken}`,
+                            "Authorization": `Bearer ${token}`,
                         },
                     })
                     if (!response.ok) throw new Error("No se pudo terminar el encuentro")
@@ -150,11 +153,12 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
+                const token = await user.getIdToken();
                     const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/${encuentroId}/programar/`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
-                            "Authorization": `Bearer ${user.accessToken}`,
+                            "Authorization": `Bearer ${token}`,
                         },
                     })
                     if (!response.ok) throw new Error("No se pudo marcar el encuentro como programado")
@@ -184,11 +188,12 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
                 try {
                     if (cerrarDetalle) cerrarDetalle();
 
+                const token = await user.getIdToken();
                     const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/${encuentroId}/`, {
                         method: "DELETE",
                         headers: {
                             "Content-Type": "application/json",
-                            "Authorization": `Bearer ${user.accessToken}`,
+                            "Authorization": `Bearer ${token}`,
                         },
                     })
                     if (!response.ok) throw new Error("No se pudo eliminar el encuentro")
@@ -226,17 +231,16 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
 
     const cambiarTurno = async (numTurno) => {
         try {
+                const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/${encuentroId}/turno/${numTurno}/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${user.accessToken}`,
+                    "Authorization": `Bearer ${token}`,
                 },
             })
             if (!response.ok) throw new Error("No se pudo pasar el turno")
             const data = await response.json()
-            //setEncuentro(data)
-            //fetchEncuentro()
         } catch (error) {
             console.error(error.message)
         }
@@ -316,11 +320,12 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
     // Actualizar dato estado participante
     const actualizarParticipante = async (participanteId, datosActualizados) => {
         try {
+                const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/${encuentroId}/participantes/${participanteId}/`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify(datosActualizados)
             });
@@ -338,10 +343,11 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
 
     const actualizarVidaPersonaje = async (personajeId, vitalidad_actual) => {
         try {
+                const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/personajes/${personajeId}/`, {
                 method: "PATCH",
                 headers: {
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({ vitalidad_actual })
@@ -414,7 +420,9 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
                                     <h2 className="text-lg font-semibold underline">Notas del encuentro</h2>
                                     <NotaList
                                         model="encuentro"
-                                        objectId={encuentroId} />
+                                        objectId={encuentroId}
+                                        dungeonMaster={dungeonMaster}
+                                        />
                                 </div>
                             )}
                         </div>

@@ -23,9 +23,10 @@ export const SesionList = ({ campanaId, dungeonMaster, party }) => {
 
     const fetchSesiones = async () => {
         try {
+                const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/sesiones/`, {
                 headers: {
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
             if (!response.ok) throw new Error("No se pudieron cargar las sesiones");
@@ -67,7 +68,10 @@ export const SesionList = ({ campanaId, dungeonMaster, party }) => {
         }
     });
 
-
+const recargarListaSesiones = ()=> {
+        setSesionActual(null)
+        fetchSesiones()
+    }
 
 
     if (loading) return <LoadingComponent />;
@@ -77,7 +81,7 @@ export const SesionList = ({ campanaId, dungeonMaster, party }) => {
             {sesionActual ? (
                 <>
                     <p className="hover:underline cursor-pointer text-lg w-fit mb-2" onClick={() => setSesionActual(null)}><i className="fa-solid fa-arrow-left" ></i>{" "}Volver a la lista de sesiones</p>
-                    <SesionDetail sesionId={sesionActual} campanaId={campanaId} dungeonMaster={dungeonMaster} party={party} cerrarDetalle={() => setSesionActual(null)} />
+                    <SesionDetail sesionId={sesionActual} campanaId={campanaId} dungeonMaster={dungeonMaster} party={party} cerrarDetalle={() => recargarListaSesiones()} />
                 </>
             ) : (
 

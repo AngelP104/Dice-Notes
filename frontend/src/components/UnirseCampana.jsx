@@ -22,9 +22,10 @@ export const UnirseCampana = () => {
         if (!perfil?.id || !user?.accessToken) return;
         const fetchDatos = async () => {
             try {
+                const token = await user.getIdToken();
                 const response = await fetch(`${API_BASE_URL}/api/unirse/${codigo}/`, {
                     headers: {
-                        Authorization: `Bearer ${user.accessToken}`,
+                        Authorization: `Bearer ${token}`,
                     },
                 });
                 if (!response.ok) throw new Error((await response.json()).detail || "Error al cargar la invitación");
@@ -48,11 +49,12 @@ export const UnirseCampana = () => {
         }
 
         try {
+                const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/unirse/${codigo}/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({ personaje_id: personajeSeleccionado }),
             });

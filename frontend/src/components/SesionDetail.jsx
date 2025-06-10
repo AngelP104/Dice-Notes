@@ -23,9 +23,10 @@ export const SesionDetail = ({ sesionId, campanaId, dungeonMaster, party, cerrar
 
     const fetchSesion = async () => {
         try {
+                const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/sesiones/${sesionId}/`, {
                 headers: {
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
             })
             if (!response.ok) throw new Error("No se pudo cargar la sesión")
@@ -60,11 +61,12 @@ export const SesionDetail = ({ sesionId, campanaId, dungeonMaster, party, cerrar
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
+                const token = await user.getIdToken();
                     const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/sesiones/${sesionId}/comenzar/`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
-                            "Authorization": `Bearer ${user.accessToken}`,
+                            "Authorization": `Bearer ${token}`,
                         },
                     })
                     if (!response.ok) throw new Error("No se pudo empezar la sesión")
@@ -102,11 +104,12 @@ export const SesionDetail = ({ sesionId, campanaId, dungeonMaster, party, cerrar
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
+                const token = await user.getIdToken();
                     const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/sesiones/${sesionId}/finalizar/`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
-                            "Authorization": `Bearer ${user.accessToken}`,
+                            "Authorization": `Bearer ${token}`,
                         },
                     })
                     if (!response.ok) throw new Error("No se pudo terminar la sesión")
@@ -142,11 +145,12 @@ export const SesionDetail = ({ sesionId, campanaId, dungeonMaster, party, cerrar
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
+                const token = await user.getIdToken();
                     const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/sesiones/${sesionId}/programar/`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
-                            "Authorization": `Bearer ${user.accessToken}`,
+                            "Authorization": `Bearer ${token}`,
                         },
                     })
                     if (!response.ok) throw new Error("No se pudo marcar la sesión como programada")
@@ -175,11 +179,12 @@ export const SesionDetail = ({ sesionId, campanaId, dungeonMaster, party, cerrar
             if (result.isConfirmed) {
                 try {
                     if (cerrarDetalle) cerrarDetalle();
+                const token = await user.getIdToken();
                     const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/sesiones/${sesionId}/`, {
                         method: "DELETE",
                         headers: {
                             "Content-Type": "application/json",
-                            "Authorization": `Bearer ${user.accessToken}`,
+                            "Authorization": `Bearer ${token}`,
                         },
                     })
                     if (!response.ok) throw new Error("No se pudo eliminar la sesión")
@@ -264,9 +269,9 @@ export const SesionDetail = ({ sesionId, campanaId, dungeonMaster, party, cerrar
             if (!mensaje) return;
             if 
                 (mensaje.action === "delete" && mensaje.data && mensaje.data.id === sesionId)
-             {
+            {
                 if (cerrarDetalle) cerrarDetalle();
-                setSesion(null);
+                setSesion(mensaje);
                 return;
             }
             // Si viene con data, es un mensaje de actualización
@@ -353,7 +358,7 @@ export const SesionDetail = ({ sesionId, campanaId, dungeonMaster, party, cerrar
                         {jugadorEstaEnCampana && (
                             <div>
                                 <h2 className="text-lg font-semibold underline my-3">Notas de la sesión</h2>
-                                <NotaList model="sesion" objectId={sesionId} />
+                                <NotaList model="sesion" objectId={sesionId} dungeonMaster={dungeonMaster}/>
                             </div>
                         )}
 

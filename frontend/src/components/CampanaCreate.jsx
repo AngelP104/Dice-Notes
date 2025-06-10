@@ -69,10 +69,11 @@ export const CampanaCreate = () => {
         }
 
         try {
+            const token = await user.getIdToken();
             const res = await fetch(`${API_BASE_URL}/api/mis-campanas/crear/`, {
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
                 body: formDataToSubmit,
             });

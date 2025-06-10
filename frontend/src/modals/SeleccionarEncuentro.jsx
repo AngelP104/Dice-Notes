@@ -12,9 +12,10 @@ export const SeleccionarEncuentro = ({ campanaId, onSeleccionar, onCerrar, encue
     useEffect(() => {
         async function fetchEncuentros() {
             try {
+                const token = await user.getIdToken();
                 const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/`, {
                     headers: {
-                        Authorization: `Bearer ${user.accessToken}`,
+                        Authorization: `Bearer ${token}`,
                     },
                 });
                 if (!response.ok) throw new Error("Error al obtener encuentros");

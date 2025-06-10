@@ -19,9 +19,10 @@ export const MisPersonajes = () => {
     useEffect(() => {
         const fetchPersonajes = async () => {
             try {
+                const token = await user.getIdToken();
                 const response = await axios.get(`${API_BASE_URL}/api/mis-personajes/${perfil.id}/`, {
                     headers: {
-                        Authorization: `Bearer ${user.accessToken}`
+                        Authorization: `Bearer ${token}`
                     }
                 });
                 setPersonajes(response.data);

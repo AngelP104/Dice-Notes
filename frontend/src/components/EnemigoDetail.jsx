@@ -67,9 +67,10 @@ export const EnemigoDetail = () => {
   // Obtenemos los idiomas disponibles en la base de datos
   const fetchIdiomas = async () => {
     try {
+                const token = await user.getIdToken();
       const response = await fetch(`${API_BASE_URL}/api/idiomas/`, {
         headers: {
-          Authorization: `Bearer ${user.accessToken}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       if (!response.ok) throw new Error("No se pudieron obtener los idiomas");
@@ -84,9 +85,10 @@ export const EnemigoDetail = () => {
   // Obtenemos los datos del enemigo
   const fetchEnemigo = async () => {
     try {
+                const token = await user.getIdToken();
       const response = await fetch(`${API_BASE_URL}/api/enemigos/${id}/`, {
         headers: {
-          Authorization: `Bearer ${user.accessToken}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       if (!response.ok) throw new Error("No se pudo obtener el enemigo");
@@ -205,10 +207,11 @@ export const EnemigoDetail = () => {
     }
 
     try {
+                const token = await user.getIdToken();
       const response = await fetch(`${API_BASE_URL}/api/enemigos/${id}/`, {
         method: "PATCH",
         headers: {
-          Authorization: `Bearer ${user.accessToken}`,
+          Authorization: `Bearer ${token}`,
         },
         body: form,
       });
@@ -251,11 +254,12 @@ export const EnemigoDetail = () => {
     if (!isConfirmed) return;            // usuario canceló
 
     try {
+                const token = await user.getIdToken();
       const res = await fetch(
         `${API_BASE_URL}/api/enemigos/${id}/`,
         {
           method: "DELETE",
-          headers: { Authorization: `Bearer ${user.accessToken}` },
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
 
@@ -440,7 +444,7 @@ export const EnemigoDetail = () => {
             {perfil.id === enemigo.creador.user && (
               <div>
             <p className="font-semibold underline text-lg mt-6">Tus notas privadas sobre el enemigo</p>
-              <NotaList model="enemigo" objectId={id} />
+              <NotaList model="enemigo" objectId={id} dungeonMaster={""} />
               </div>
             )}
 

@@ -13,14 +13,15 @@ export const Navbar = () => {
   const [menuAbierto, setMenuAbierto] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
-  
+
   // Método para hacer logout del usuario
   const logout = async () => {
     await signOut(authFirebase);
+    const token = await user.getIdToken();
     await fetch(`${API_BASE_URL}/api/logout/`, {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${user.getIdToken()}`,
+        "Authorization": `Bearer ${token}`,
       },
     });
     navigate("/");
@@ -97,7 +98,7 @@ export const Navbar = () => {
           {menuAbierto && (
             <div className="absolute right-0 mt-2 w-48 bg-gray-800 text-white rounded-lg shadow-lg z-50 overflow-hidden">
               <NavLink
-                to={`/perfil/${perfil.id}`} 
+                to={`/perfil/${perfil.id}`}
                 className="block px-4 py-2 hover:bg-gray-900"
                 onClick={() => setMenuAbierto(false)}
               >
@@ -151,7 +152,7 @@ export const Navbar = () => {
               className="py-2 flex items-center"
               onClick={() => setMobileMenuOpen(false)}
             >
-             <img src={perfil.avatar} className="w-6 h-6 rounded-full border-2 bg-white border-white mr-1" /> Ver Perfil
+              <img src={perfil.avatar} className="w-6 h-6 rounded-full border-2 bg-white border-white mr-1" /> Ver Perfil
             </NavLink>
             <button
               onClick={() => {

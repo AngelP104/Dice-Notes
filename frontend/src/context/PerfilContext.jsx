@@ -37,9 +37,10 @@ export const PerfilProvider = ({ children, user }) => {
       }
 
       try {
+    const token = await user.getIdToken(); // Se obtiene un token nuevo 
         const response = await fetch(`${API_BASE_URL}/api/obtener-perfil/`, {
           headers: {
-            Authorization: `Bearer ${user.accessToken}`,
+            Authorization: `Bearer ${token}`,
           },
         });
 

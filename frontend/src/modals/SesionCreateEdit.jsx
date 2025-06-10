@@ -18,9 +18,10 @@ export const SesionCreateEdit = ({ campanaId, sesionId, onClose, onSubmitted, mo
         if (modo === "edit") {
             async function fetchSesion() {
                 try {
+                const token = await user.getIdToken();
                     const res = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/sesiones/${sesionId}/`, {
                         headers: {
-                            "Authorization": `Bearer ${user.accessToken}`,
+                            "Authorization": `Bearer ${token}`,
                         }
                     });
                     if (!res.ok) throw new Error("Error al cargar la sesión");
@@ -56,11 +57,12 @@ export const SesionCreateEdit = ({ campanaId, sesionId, onClose, onSubmitted, mo
         const method = modo === "edit" ? "PATCH" : "POST";
 
         try {
+                const token = await user.getIdToken();
             const res = await fetch(url, {
                 method,
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${user.accessToken}`,
+                    "Authorization": `Bearer ${token}`,
                 },
                 body: JSON.stringify(form),
             });

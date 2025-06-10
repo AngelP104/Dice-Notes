@@ -12,10 +12,11 @@ export const CrearInvitacion = ({ show, onClose, campanaId }) => {
 
     useEffect(() => {
         const crearInvitacion = async () => {
+                const token = await user.getIdToken();
             const res = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/invitacion/`, {
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
 
             });

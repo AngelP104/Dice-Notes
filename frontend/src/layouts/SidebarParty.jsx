@@ -22,9 +22,10 @@ export const SidebarParty = ({ campanaId, dungeonMaster }) => {
     if (!perfil || !perfil.id) return;
     const fetchPersonajes = async () => {
       try {
+                const token = await user.getIdToken();
         const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/party/`, {
           headers: {
-            Authorization: `Bearer ${user.accessToken}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         const data = await response.json();

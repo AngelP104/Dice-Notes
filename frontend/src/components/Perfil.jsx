@@ -30,9 +30,10 @@ export const Perfil = () => {
     const fetchPerfil = async () => {
 
         try {
+                const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/perfil/${perfilUser}/`, {
                 headers: {
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
             if (!response.ok) throw new Error("No se pudo obtener el perfil");
@@ -48,11 +49,11 @@ export const Perfil = () => {
 
     const fetchInfoPerfil = async () => {
         try {
+                const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/perfil/${perfilUser}/info/`, {
                 headers: {
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
-
             })
             if (!response.ok) throw new Error("No se pudo obtener el perfil");
             const data = await response.json();
@@ -96,10 +97,11 @@ export const Perfil = () => {
         }
 
         try {
+                const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/perfil/${perfilUser}/`, {
                 method: "PATCH",
                 headers: {
-                    Authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
                 body: formData,
             });

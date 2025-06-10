@@ -71,9 +71,10 @@ export const PersonajeDetail = () => {
   // Obtenemos los idiomas disponibles en la base de datos
   const fetchIdiomas = async () => {
     try {
+                const token = await user.getIdToken();
       const response = await fetch(`${API_BASE_URL}/api/idiomas/`, {
         headers: {
-          Authorization: `Bearer ${user.accessToken}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       if (!response.ok) throw new Error("No se pudieron obtener los idiomas");
@@ -88,9 +89,10 @@ export const PersonajeDetail = () => {
   // Obtenemos los datos del personaje
   const fetchPersonaje = async () => {
     try {
+                const token = await user.getIdToken();
       const response = await fetch(`${API_BASE_URL}/api/personajes/${id}/`, {
         headers: {
-          Authorization: `Bearer ${user.accessToken}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       if (!response.ok) throw new Error("No se pudo obtener el personaje");
@@ -186,10 +188,11 @@ export const PersonajeDetail = () => {
     }
 
     try {
+                const token = await user.getIdToken();
       const response = await fetch(`${API_BASE_URL}/api/personajes/${id}/`, {
         method: "PATCH",
         headers: {
-          Authorization: `Bearer ${user.accessToken}`,
+          Authorization: `Bearer ${token}`,
         },
         body: form,
       });
@@ -231,11 +234,12 @@ export const PersonajeDetail = () => {
     if (!isConfirmed) return; // el usuario canceló
 
     try {
+                const token = await user.getIdToken();
       const res = await fetch(
         `${API_BASE_URL}/api/personajes/${id}/`,
         {
           method: "DELETE",
-          headers: { Authorization: `Bearer ${user.accessToken}` },
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
 
@@ -424,7 +428,7 @@ export const PersonajeDetail = () => {
               <>
                 <p className="font-semibold underline text-lg mt-6">Notas entre tú y DM de campaña</p>
                 <p className="text-gray-300 italic">El DM sólo podrá ver e interactuar con estas notas desde la barra lateral de personajes de una campaña.</p>
-                <NotaList model="personaje" objectId={id} />
+                <NotaList model="personaje" objectId={id} dungeonMaster={""}/>
               </>
             )}
 

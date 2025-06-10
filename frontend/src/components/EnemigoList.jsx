@@ -22,9 +22,10 @@ export const EnemigoList = () => {
     if (!perfil) return;
     const fetchEnemigos = async () => {
       try {
+                const token = await user.getIdToken();
         const response = await axios.get(`${API_BASE_URL}/api/enemigos/`, {
           headers: {
-            Authorization: `Bearer ${user.accessToken}`
+            Authorization: `Bearer ${token}`
           }
         });
         setEnemigos(response.data);

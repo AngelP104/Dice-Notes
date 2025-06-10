@@ -105,7 +105,7 @@ export const Nota = ({
                     </p>
 
                 </div>
-                {(nota.creador.user === perfil.id || dungeonMaster.user === perfil.id) && (
+                {(nota.creador.user === perfil.id || dungeonMaster?.user === perfil.id) && (
                     <button
                         onClick={() => eliminarNota(nota.id)}
                         className="text-red-500 hover:text-red-400 px-3 cursor-pointer rounded-full"

@@ -56,7 +56,7 @@ Sincroniza tus campañas con todos los participantes:
 
 ---
 
-# 🐳 Guía para levantar Docker localmente - Dice & Notes
+# 🐳 Guía para levantar Docker localmente
 
 Este proyecto utiliza Docker para levantar un entorno de desarrollo con **backend** (Django), **frontend** (React) y **servicios adicionales** como PostgreSQL y Redis.
 
@@ -75,7 +75,7 @@ Antes de ejecutar Docker, asegúrate de tener los siguientes archivos configurad
 
 ### 1. 🔐 Variables de entorno
 
-#### Backend (`.env` en el directorio del backend)
+#### Backend (`.env.docker` en el directorio del backend)
 
 DJANGO_SECRET_KEY=django-insecure-<tu-clave>
 DEBUG=True
@@ -99,7 +99,7 @@ Formato esperado:
 
 #### Frontend (`.env` en el directorio del frontend)
 
-# Firebase
+Firebase
 VITE_FIREBASE_API_KEY=clave
 VITE_FIREBASE_AUTH_DOMAIN=clave
 VITE_FIREBASE_PROJECT_ID=clave
@@ -108,18 +108,10 @@ VITE_FIREBASE_MESSAGING_SENDER_ID=clave
 VITE_FIREBASE_APP_ID=clave
 VITE_FIREBASE_MEASUREMENT_ID=clave
 
-# Local
+Local
 VITE_API_BASE_URL=http://localhost:8000
 VITE_WS_BASE_URL=ws://localhost:8000/ws
 VITE_FRONT_BASE_URL=http://localhost:5173
-
----
-
-### 2. 🔐 Archivo de credenciales de Firebase
-
-Debes crear un archivo llamado `firebase_config.json` en el directorio raíz del backend.
-
-
 
 ---
 
@@ -134,18 +126,15 @@ Debes crear un archivo llamado `firebase_config.json` en el directorio raíz del
 
 Ubícate en la raíz del proyecto donde esté tu archivo `docker-compose.yml` y ejecuta:
 
-
 docker compose up
 
 
 Si deseas forzar la reconstrucción de las imágenes:
 
-
 docker compose up --build
 
 
 Para apagar y eliminar los contenedores, volúmenes y redes creadas:
-
 
 docker compose down
 
@@ -262,4 +251,10 @@ Una vez ejecutado, deberías tener:
 - Preparación para despliegue
 
 ## 🔧 1.0.1 - Arreglos varios de primera versión (09/06/2025)
-- Arreglos varios en invitaciones, enemigos, notas e imagenes 
+- Arreglos varios en invitaciones, enemigos, notas e imagenes
+
+## 🧾 1.0.2 - Notas & encuentros (10/06/2025)
+- La sesión ya no caduca fácilmente
+- Arreglos varios de gestión de notas
+- Arreglo de muestra de imagenes en un encuentro
+- Actualización al borrar un encuentro (TODO: lo mismo con sesiones)
