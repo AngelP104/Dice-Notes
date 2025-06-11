@@ -287,7 +287,7 @@ export const Perfil = () => {
                                 <img
                                     src={perfilVisionado?.avatar}
                                     alt="Avatar"
-                                    className="w-24 h-24 rounded-full border-4 border-white bg-gray-200"
+                                    className="w-24 h-24 rounded-full border-4 border-white bg-gray-200 object-cover"
                                 />
                                 <div className="mt-2">
                                     <input
