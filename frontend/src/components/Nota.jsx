@@ -97,7 +97,7 @@ export const Nota = ({
                         </div>
                     )}
                     <p className="flex items-center text-sm text-gray-400 mr-3  text-ellipsis select-none">
-                        <img src={nota.creador.avatar} className="w-6 h-6 rounded-full mr-1 border-1 border-white bg-gray-300"
+                        <img src={nota.creador.avatar} className="w-6 h-6 rounded-full mr-1 border-1 border-white bg-gray-300 object-cover"
                             draggable="false"
                         />
 
