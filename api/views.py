@@ -425,7 +425,7 @@ class IdiomaList(APIView):
 # * Sesiones
 class SesionesPorCampanaView(APIView):
     def get(self, request, campana_id):
-        sesiones = Sesion.objects.filter(campana_id=campana_id)
+        sesiones = Sesion.objects.filter(campana_id=campana_id).order_by('-fecha_inicio')
         serializer = SesionSerializer(sesiones, many=True)
 
         return Response(serializer.data)
