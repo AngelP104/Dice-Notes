@@ -12,7 +12,7 @@ export const Home = () => {
 
   // Obtienemos los datos del usuario autenticado con Firebase y su perfil creado
   const { perfil, user, loading } = usePerfil();
-  const VERSION = "v1.0.2a"
+  const VERSION = "v1.0.2b"
 
   const navigate = useNavigate();
 

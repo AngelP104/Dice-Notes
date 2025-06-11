@@ -18,7 +18,7 @@ export const PerfilCardSmall = ({perfil}) => {
 
   return (
     <div className="flex w-full p-1 pr-3 items-center cursor-pointer bg-[#833961] hover:bg-[#92416e] rounded-md select-none" onClick={handleClick}>
-        <img src={getAvatarUrl(perfil.avatar)} className="w-8 h-8 rounded-full border-2 border-white bg-gray-200 select-none" />
+        <img src={getAvatarUrl(perfil.avatar)} className="w-8 h-8 rounded-full border-2 border-white bg-gray-200 select-none object-cover" />
         <p className="ml-2 text-sm font-semibold truncate text-white select-none">{perfil.apodo}</p>
     </div>
   );
