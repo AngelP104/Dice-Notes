@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { LoadingComponent } from "./LoadingComponent";
 import { CampanaCard } from "./CampanaCard";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 
@@ -39,7 +40,7 @@ export const Perfil = () => {
             if (!response.ok) throw new Error("No se pudo obtener el perfil");
             const data = await response.json();
             setPerfilVisionado(data);
-            console.log("Data perfil", data);
+            //console.log("Data perfil", data);
         } catch (err) {
             setError(err.message);
         } finally {
@@ -61,7 +62,7 @@ export const Perfil = () => {
             setCampanasCreadas(data.creadas)
             setCampanasEnParty(data.en_party)
             setPersonajes(data.personajes)
-            console.log("INFO perfil", data);
+            //console.log("INFO perfil", data);
         } catch (err) {
             setError(err.message);
         }
@@ -89,8 +90,8 @@ export const Perfil = () => {
         e.preventDefault();
 
         // Validación del avatar
-        if (formData.avatar) {
-            const file = formData.avatar;
+        if (updatePerfil.avatar) {
+            const file = updatePerfil.avatar;
             const validTypes = ["image/jpeg", "image/png", "image/jpg"];
 
             if (!validTypes.includes(file.type)) {

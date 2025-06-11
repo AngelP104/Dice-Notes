@@ -22,12 +22,12 @@ export const Login = () => {
   const from = location.state?.from || "/";
 
   // useEffect(() => {
-  //   console.log(from)
+  //   //console.log(from)
   // }, [location])
 
   // useEffect(() => {
-  //   console.log("From location.state:", location.state);
-  //   console.log("From final:", from);
+  //   //console.log("From location.state:", location.state);
+  //   //console.log("From final:", from);
   // }, [location]);
 
 
@@ -140,7 +140,7 @@ export const Login = () => {
 
       navigate(from, { replace: true });
     } catch (error) {
-      console.log(error)
+      //console.log(error)
       Swal.fire({
         title: 'Error',
         text: `No se pudo iniciar sesión con Google`,

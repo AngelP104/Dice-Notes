@@ -30,7 +30,7 @@ export const UnirseCampana = () => {
                 });
                 if (!response.ok) throw new Error((await response.json()).detail || "Error al cargar la invitación");
                 const data = await response.json();
-                console.log("perfil", perfil)
+                //console.log("perfil", perfil)
                 setCampana(data.campana);
                 setPersonajes(data.personajes);
             } catch (err) {

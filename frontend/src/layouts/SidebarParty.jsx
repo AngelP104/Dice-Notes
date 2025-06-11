@@ -30,7 +30,7 @@ export const SidebarParty = ({ campanaId, dungeonMaster }) => {
         });
         const data = await response.json();
         setParty(data);
-        console.log("Party data:", data);
+        //console.log("Party data:", data);
       } catch (error) {
         setLoading(false);
         console.error("Error cargando los personajes:", error);

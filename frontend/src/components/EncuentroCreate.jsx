@@ -107,7 +107,7 @@ export const EncuentroCreate = () => {
 
 
             const encuentro = await res.json();
-            console.log(encuentro)
+            //console.log(encuentro)
 
             // Crear participantes y asignarlos
             const participantes = [
@@ -123,7 +123,7 @@ export const EncuentroCreate = () => {
                 })),
             ];
 
-            console.log(participantes)
+            //console.log(participantes)
 
             for (const participante of participantes) {
 

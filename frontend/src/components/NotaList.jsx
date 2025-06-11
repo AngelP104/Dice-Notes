@@ -61,14 +61,14 @@ export const NotaList = ({ model, objectId, dungeonMaster = null }) => {
     useEffect(() => {
         if (!objectId) return; // no hagas nada si objectId es falsy
 
-        console.log("objectId recibido:", objectId);
+        //console.log("objectId recibido:", objectId);
 
         fetchNotas();
 
         socketRef.current = new WebSocket(`${WS_BASE_URL}/notas/${model}/${objectId}/?token=${user.accessToken}`);
 
         socketRef.current.onopen = () => {
-            console.log('Conectado al WebSocket de notas.');
+            //console.log('Conectado al WebSocket de notas.');
         };
 
         socketRef.current.onmessage = (e) => {
@@ -104,7 +104,7 @@ export const NotaList = ({ model, objectId, dungeonMaster = null }) => {
         };
 
         socketRef.current.onclose = () => {
-            console.log('WebSocket cerrado.');
+            //console.log('WebSocket cerrado.');
         };
 
         return () => {
@@ -140,7 +140,7 @@ export const NotaList = ({ model, objectId, dungeonMaster = null }) => {
             const data = await response.json();
             //Set para hacer autofocus
             setUltimaNotaCreada(data.id);
-            console.log('Nota guardada en la base de datos:', data);
+            //console.log('Nota guardada en la base de datos:', data);
 
             socketRef.current?.send(JSON.stringify({
                 model,
@@ -171,7 +171,7 @@ export const NotaList = ({ model, objectId, dungeonMaster = null }) => {
                     action: 'delete',
                     data: { id },
                 }));
-                console.log('Nota eliminada');
+                //console.log('Nota eliminada');
             } else {
                 const errorText = await response.text();
                 console.warn(`Error al eliminar nota: ${response.status} - ${errorText}`);
@@ -199,7 +199,7 @@ export const NotaList = ({ model, objectId, dungeonMaster = null }) => {
             }
 
             const data = await response.json();
-            console.log('Nota actualizada en la base de datos:', data);
+            //console.log('Nota actualizada en la base de datos:', data);
 
             socketRef.current?.send(JSON.stringify({
                 model,
@@ -237,7 +237,7 @@ export const NotaList = ({ model, objectId, dungeonMaster = null }) => {
                 data,
             }));
 
-            console.log('Contenido actualizado:', data);
+            //console.log('Contenido actualizado:', data);
         } catch (err) {
             console.error('Error al actualizar contenido:', err);
         }

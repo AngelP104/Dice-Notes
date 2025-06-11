@@ -58,7 +58,7 @@ export const EnemigoCreate = () => {
   useEffect(() => {
     const fetchIdiomas = async () => {
       try {
-                const token = await user.getIdToken();
+        const token = await user.getIdToken();
         const response = await fetch(`${API_BASE_URL}/api/idiomas/`, {
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -110,34 +110,33 @@ export const EnemigoCreate = () => {
       return;
     }
 
-    setLoading(true);
     const form = new FormData();
     for (const key in formData) {
       if (key === "imagen" && formData.imagen instanceof File) {
-              const file = formData.imagen;
-              const validTypes = ["image/jpeg", "image/png", "image/jpg"];
-          
-              if (!validTypes.includes(file.type)) {
-                Swal.fire({
-                  text: "Solo se admiten archivos JPG, JPEG o PNG.",
-                  theme: "dark",
-                  showConfirmButton: false,
-                  icon: "error",
-                });
-                return;
-              }
-          
-              if (file.name.length > 100) {
-                Swal.fire({
-                  text: "El nombre del archivo es demasiado largo (máx. 100 caracteres).",
-                  theme: "dark",
-                  showConfirmButton: false,
-                  icon: "error",
-                });
-                return;
-              }
-          
-              form.append("imagen", file);
+        const file = formData.imagen;
+        const validTypes = ["image/jpeg", "image/png", "image/jpg"];
+
+        if (!validTypes.includes(file.type)) {
+          Swal.fire({
+            text: "Solo se admiten archivos JPG, JPEG o PNG.",
+            theme: "dark",
+            showConfirmButton: false,
+            icon: "error",
+          });
+          return;
+        }
+
+        if (file.name.length > 100) {
+          Swal.fire({
+            text: "El nombre del archivo es demasiado largo (máx. 100 caracteres).",
+            theme: "dark",
+            showConfirmButton: false,
+            icon: "error",
+          });
+          return;
+        }
+
+        form.append("imagen", file);
       } else if (key === "idiomas") {
         formData.idiomas.forEach(idiomaId => form.append("idiomas_ids", idiomaId));
       } else if (key === "competencias") {
@@ -148,7 +147,7 @@ export const EnemigoCreate = () => {
     }
 
     try {
-                const token = await user.getIdToken();
+      const token = await user.getIdToken();
       const response = await fetch(`${API_BASE_URL}/api/enemigos/crear/`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },

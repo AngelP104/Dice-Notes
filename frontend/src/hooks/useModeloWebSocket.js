@@ -12,7 +12,7 @@ export const useModeloWebSocket = ({ modelo, objectId = null, onMensaje }) => {
         ws.current = new WebSocket(`${WS_BASE_URL}/modelos/${modelo}/${objectId ? objectId + "/" : ""}?token=${user.accessToken}`);
 
         ws.current.onopen = () => {
-            console.log(`[WS abierto] modelo=${modelo} [${objectId || "list"}]`);
+            //console.log(`[WS abierto] modelo=${modelo} [${objectId || "list"}]`);
         };
 
         ws.current.onerror = (error) => {
@@ -20,13 +20,13 @@ export const useModeloWebSocket = ({ modelo, objectId = null, onMensaje }) => {
         };
 
         ws.current.onclose = () => {
-            console.log(`[WS cerrado] modelo=${modelo} [${objectId || "list"}]`);
+            //console.log(`[WS cerrado] modelo=${modelo} [${objectId || "list"}]`);
         };
 
         ws.current.onmessage = (event) => {
             try {
                 const mensaje = JSON.parse(event.data);
-                console.log("Mensaje recibido:", mensaje);
+                //console.log("Mensaje recibido:", mensaje);
                 if (onMensaje) {
                     onMensaje(mensaje.data);
                 }

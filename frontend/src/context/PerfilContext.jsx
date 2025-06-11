@@ -47,12 +47,12 @@ export const PerfilProvider = ({ children, user }) => {
         
         const data = await response.json();
         setPerfil(data); // Guarda el perfil en el contexto
-        console.log("Perfil obtenido:", data);
-        console.log("User:", user);
+        //console.log("Perfil obtenido:", data);
+        //console.log("User:", user);
       } catch (error) {
         setPerfil(null); // Si hay un error, aseguramos que perfil sea null
         console.error("Error al obtener el perfil:", error);
-        console.log(user)
+        //console.log(user)
       } finally {
         setLoading(false);
       }

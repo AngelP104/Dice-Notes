@@ -231,7 +231,7 @@ export const AjustesCampana = ({ campanaId, onUpdateInfo }) => {
                             <img
                                 src={imagenPreview}
                                 alt="Vista previa"
-                                className="mt-2 max-h-48 rounded-xl border-2 "
+                                className="mt-2 max-h-48 rounded-xl border-2 bg-gray-300"
                             />
                         )}
                     </div>

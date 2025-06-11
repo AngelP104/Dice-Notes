@@ -32,7 +32,7 @@ export const App = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(authFirebase, (userFirebase) => {
       if (userFirebase) {
-        //console.log("Usuario autenticado:", userFirebase);
+        ////console.log("Usuario autenticado:", userFirebase);
         setUser(userFirebase);
       } else {
         setUser(null);

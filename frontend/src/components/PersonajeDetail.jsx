@@ -80,7 +80,7 @@ export const PersonajeDetail = () => {
       if (!response.ok) throw new Error("No se pudieron obtener los idiomas");
       const data = await response.json();
       setIdiomasDisponibles(data);
-      console.log("idiomas", data)
+      //console.log("idiomas", data)
     } catch (err) {
       setError(err.message);
     }
@@ -98,7 +98,7 @@ export const PersonajeDetail = () => {
       if (!response.ok) throw new Error("No se pudo obtener el personaje");
       const data = await response.json();
       setPersonaje(data);
-      console.log(data)
+      //console.log(data)
       setFormData({
         ...data,
         imagen: null,

@@ -29,7 +29,7 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
             });
             if (!response.ok) throw new Error("Error al obtener el encuentro");
             const data = await response.json();
-            console.log(data)
+            //console.log(data)
             setEncuentro(data);
             setParticipantes(data.participantes);
 
@@ -43,7 +43,7 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
             }
         } catch (error) {
             cerrarDetalle(null)
-            console.log("Error al obtener el encuentro" + error);
+            //console.log("Error al obtener el encuentro" + error);
         } finally {
             setLoading(false);
         }

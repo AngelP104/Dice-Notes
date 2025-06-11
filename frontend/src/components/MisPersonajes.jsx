@@ -27,7 +27,7 @@ export const MisPersonajes = () => {
                 });
                 setPersonajes(response.data);
                 setLoading(false);
-                console.log(personajes)
+                //console.log(personajes)
             } catch (error) {
                 setLoading(false);
             }

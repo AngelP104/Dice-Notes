@@ -25,7 +25,7 @@ export const PasswordReset = () => {
         theme: "dark",
       });
     } catch (error) {
-      console.log("Error al enviar el correo:", error.message);
+      //console.log("Error al enviar el correo:", error.message);
       alert("Error al enviar el correo: " + error.message);
     }
   };

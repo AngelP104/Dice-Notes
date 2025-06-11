@@ -208,7 +208,7 @@ export const CampanaDetail = () => {
         const data = await response.json();
         setParty(data);
 
-        console.log(party)
+        //console.log(party)
       } catch (error) {
         setError(error.message);
       }

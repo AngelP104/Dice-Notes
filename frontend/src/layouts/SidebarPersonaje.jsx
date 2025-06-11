@@ -35,7 +35,7 @@ export const SidebarPersonaje = ({ personajeId, dungeonMaster, selectedPersonaje
             if (!response.ok) throw new Error("No se pudo obtener el personaje");
             const data = await response.json();
             setPersonaje(data);
-            console.log(data)
+            //console.log(data)
 
 
         } catch (err) {
