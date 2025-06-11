@@ -123,6 +123,32 @@ export const PersonajeCreate = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Validación de la imagen
+        if (formData.imagen) {
+            const file = formData.imagen;
+            const validTypes = ["image/jpeg", "image/png", "image/jpg"];
+
+            if (!validTypes.includes(file.type)) {
+                Swal.fire({
+                    text: "Solo se admiten archivos JPG, JPEG o PNG.",
+                    theme: "dark",
+                    showConfirmButton: false,
+                    icon: "error",
+                });
+                return;
+            }
+
+            if (file.name.length > 100) {
+                Swal.fire({
+                    text: "El nombre del archivo es demasiado largo (máx. 100 caracteres).",
+                    theme: "dark",
+                    showConfirmButton: false,
+                    icon: "error",
+                });
+                return;
+            }
+        }
+
         if (!formData.nombre || !formData.raza || !formData.clase) {
             setError("Nombre, raza y clase son obligatorios.");
             return;
@@ -160,7 +186,7 @@ export const PersonajeCreate = () => {
         }
 
         try {
-                const token = await user.getIdToken();
+            const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/mis-personajes/crear/`, {
                 method: "POST",
                 headers: {
@@ -206,7 +232,7 @@ export const PersonajeCreate = () => {
                             <input
                                 type="file"
                                 name="imagen"
-                                accept="image/*"
+                                accept="image/png, image/jpeg, image/jpg"
                                 onChange={handleInputChange}
                                 className="bg-[#291325] p-2 rounded-lg w-full"
                             />

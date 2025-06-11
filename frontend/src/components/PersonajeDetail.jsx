@@ -71,7 +71,7 @@ export const PersonajeDetail = () => {
   // Obtenemos los idiomas disponibles en la base de datos
   const fetchIdiomas = async () => {
     try {
-                const token = await user.getIdToken();
+      const token = await user.getIdToken();
       const response = await fetch(`${API_BASE_URL}/api/idiomas/`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -89,7 +89,7 @@ export const PersonajeDetail = () => {
   // Obtenemos los datos del personaje
   const fetchPersonaje = async () => {
     try {
-                const token = await user.getIdToken();
+      const token = await user.getIdToken();
       const response = await fetch(`${API_BASE_URL}/api/personajes/${id}/`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -150,6 +150,32 @@ export const PersonajeDetail = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validación de la imagen
+    if (formData.imagen) {
+      const file = formData.imagen;
+      const validTypes = ["image/jpeg", "image/png", "image/jpg"];
+
+      if (!validTypes.includes(file.type)) {
+        Swal.fire({
+          text: "Solo se admiten archivos JPG, JPEG o PNG.",
+          theme: "dark",
+          showConfirmButton: false,
+          icon: "error",
+        });
+        return;
+      }
+
+      if (file.name.length > 100) {
+        Swal.fire({
+          text: "El nombre del archivo es demasiado largo (máx. 100 caracteres).",
+          theme: "dark",
+          showConfirmButton: false,
+          icon: "error",
+        });
+        return;
+      }
+    }
+
     if (!formData.idiomas || formData.idiomas.length === 0) {
       Swal.fire({
         text: "Debes seleccionar al menos un idioma",
@@ -188,7 +214,7 @@ export const PersonajeDetail = () => {
     }
 
     try {
-                const token = await user.getIdToken();
+      const token = await user.getIdToken();
       const response = await fetch(`${API_BASE_URL}/api/personajes/${id}/`, {
         method: "PATCH",
         headers: {
@@ -234,7 +260,7 @@ export const PersonajeDetail = () => {
     if (!isConfirmed) return; // el usuario canceló
 
     try {
-                const token = await user.getIdToken();
+      const token = await user.getIdToken();
       const res = await fetch(
         `${API_BASE_URL}/api/personajes/${id}/`,
         {
@@ -287,7 +313,7 @@ export const PersonajeDetail = () => {
                 >
                   Editar Personaje
                 </button>
-                
+
               </>
             ) : (
               <div>
@@ -339,8 +365,8 @@ export const PersonajeDetail = () => {
 
             {/* Otra Información */}
             <div className="">
-              <VitalidadPersonaje esCreador={esCreador} personaje={personaje} setPersonaje={setPersonaje} dungeonMaster={""}/>
-              
+              <VitalidadPersonaje esCreador={esCreador} personaje={personaje} setPersonaje={setPersonaje} dungeonMaster={""} />
+
               <p>
                 <strong>Inspiración:</strong> {personaje.inspiracion ? "Sí" : "No"}
               </p>
@@ -428,7 +454,7 @@ export const PersonajeDetail = () => {
               <>
                 <p className="font-semibold underline text-lg mt-6">Notas entre tú y DM de campaña</p>
                 <p className="text-gray-300 italic">El DM sólo podrá ver e interactuar con estas notas desde la barra lateral de personajes de una campaña.</p>
-                <NotaList model="personaje" objectId={id} dungeonMaster={""}/>
+                <NotaList model="personaje" objectId={id} dungeonMaster={""} />
               </>
             )}
 
@@ -451,7 +477,7 @@ export const PersonajeDetail = () => {
                 <input
                   type="file"
                   name="imagen"
-                  accept="image/*"
+                  accept="image/png, image/jpeg, image/jpg"
                   onChange={handleInputChange}
                   className="bg-[#291325] p-2 rounded-lg w-full"
                 />

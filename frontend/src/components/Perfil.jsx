@@ -30,7 +30,7 @@ export const Perfil = () => {
     const fetchPerfil = async () => {
 
         try {
-                const token = await user.getIdToken();
+            const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/perfil/${perfilUser}/`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -49,7 +49,7 @@ export const Perfil = () => {
 
     const fetchInfoPerfil = async () => {
         try {
-                const token = await user.getIdToken();
+            const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/perfil/${perfilUser}/info/`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -88,6 +88,32 @@ export const Perfil = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Validación del avatar
+        if (formData.avatar) {
+            const file = formData.avatar;
+            const validTypes = ["image/jpeg", "image/png", "image/jpg"];
+
+            if (!validTypes.includes(file.type)) {
+                Swal.fire({
+                    text: "Solo se admiten archivos JPG, JPEG o PNG.",
+                    theme: "dark",
+                    showConfirmButton: false,
+                    icon: "error",
+                });
+                return;
+            }
+
+            if (file.name.length > 100) {
+                Swal.fire({
+                    text: "El nombre del archivo es demasiado largo (máx. 100 caracteres).",
+                    theme: "dark",
+                    showConfirmButton: false,
+                    icon: "error",
+                });
+                return;
+            }
+        }
+
         const formData = new FormData();
         formData.append("apodo", updatePerfil.apodo);
         formData.append("biografia", updatePerfil.biografia);
@@ -97,7 +123,7 @@ export const Perfil = () => {
         }
 
         try {
-                const token = await user.getIdToken();
+            const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/perfil/${perfilUser}/`, {
                 method: "PATCH",
                 headers: {
@@ -132,22 +158,22 @@ export const Perfil = () => {
                     <div className="">
                         <div className="bg-[#833961] p-4 rounded-xl">
 
-                        <div className="lg:flex lg:items-center space-x-4 ">
-                            <img
-                                src={perfilVisionado?.avatar}
-                                className="w-28 h-28 rounded-full border-4 object-center bg-gray-200 object-cover"
-                            />
-                            <div>
-                                <h2 className="text-4xl mt-4 font-bold">{perfilVisionado?.apodo}</h2>
+                            <div className="lg:flex lg:items-center space-x-4 ">
+                                <img
+                                    src={perfilVisionado?.avatar}
+                                    className="w-28 h-28 rounded-full border-4 object-center bg-gray-200 object-cover"
+                                />
+                                <div>
+                                    <h2 className="text-4xl mt-4 font-bold">{perfilVisionado?.apodo}</h2>
+                                </div>
                             </div>
-                        </div>
-                        <div className="mt-6 lg:w-1/2">
-                            <h3 className="text-xl font-semibold">Biografía</h3>
-                            <p className="text-gray-200 mt-2  bg-[#92416e] p-2 rounded-lg border-2 border-[#63304c]">
-                                {perfilVisionado?.biografia || "Sin biografía disponible"}
-                            </p>
-                        </div>
-                        <div>
+                            <div className="mt-6 lg:w-1/2">
+                                <h3 className="text-xl font-semibold">Biografía</h3>
+                                <p className="text-gray-200 mt-2  bg-[#92416e] p-2 rounded-lg border-2 border-[#63304c]">
+                                    {perfilVisionado?.biografia || "Sin biografía disponible"}
+                                </p>
+                            </div>
+                            <div>
                             </div>
 
                             {perfil?.id === perfilVisionado?.user && (
@@ -241,7 +267,7 @@ export const Perfil = () => {
                                     </div>
                                 )}
                             </div>
-                            
+
                         </div>
                     </div>
 
@@ -265,7 +291,7 @@ export const Perfil = () => {
                                 <div className="mt-2">
                                     <input
                                         type="file"
-                                        accept="image/*"
+                                        accept="image/png, image/jpeg, image/jpg"
                                         className="w-fit mt-1 p-2 border border-gray-300 rounded-lg bg-[#291325] text-white"
                                         onChange={(e) => {
                                             const file = e.target.files[0];
