@@ -32,7 +32,7 @@ export const EncuentroPanel = ({ dungeonMaster, campanaId, encuentroId, party })
 
             const data = await res.json();
             setEncuentrosActivos(data);
-            //console.log("Encuentros activos:", data);
+            console.log("Encuentros activos:", data);
         } catch (err) {
             console.error("Error al cargar encuentro activo:", err);
             setEncuentrosActivos([]); // Manejo de error, podrías mostrar un mensaje al usuario
@@ -46,8 +46,8 @@ export const EncuentroPanel = ({ dungeonMaster, campanaId, encuentroId, party })
 
     // Cuando el usuario selecciona un encuentro
     const handleSeleccionarEncuentro = async (encuentroId) => {
-        //console.log("campanaId:", campanaId);
-        //console.log("encuentroId:", encuentroId);
+        console.log("campanaId:", campanaId);
+        console.log("encuentroId:", encuentroId);
         try {
                 const token = await user.getIdToken();
             const response = await fetch(`${API_BASE_URL}/api/campanas/${campanaId}/encuentros/${encuentroId}/comenzar/`, {
@@ -61,7 +61,7 @@ export const EncuentroPanel = ({ dungeonMaster, campanaId, encuentroId, party })
             const data = await response.json();
             setEncuentrosActivos(data);
             fetchEncuentrosActivos(); // Refrescar la lista de encuentros activos
-            //console.log("Encuentro iniciado:", data);
+            console.log("Encuentro iniciado:", data);
             setMostrarModal(false);
         } catch (err) {
             console.error("No se pudo iniciar el encuentro:", err);

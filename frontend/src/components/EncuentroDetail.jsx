@@ -29,7 +29,7 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
             });
             if (!response.ok) throw new Error("Error al obtener el encuentro");
             const data = await response.json();
-            //console.log(data)
+            console.log(data)
             setEncuentro(data);
             setParticipantes(data.participantes);
 
@@ -43,7 +43,7 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
             }
         } catch (error) {
             cerrarDetalle(null)
-            //console.log("Error al obtener el encuentro" + error);
+            console.log("Error al obtener el encuentro" + error);
         } finally {
             setLoading(false);
         }
@@ -257,6 +257,16 @@ export const EncuentroDetail = ({ encuentroId, campanaId, dungeonMaster, cerrarD
                             <i className="fas fa-stop mr-1"></i> Finalizar encuentro
                         </button>
                         <div className="flex justify-between items-center gap-2 z-10 fixed bottom-6 left-0 right-2 w-fit max-w-600 m-auto "
+                        >
+                            <button onClick={handleActualizarTurno(-1)} className="bg-indigo-500 border-2 hover:border-yellow-400 hover:ring-2 hover:ring-yellow-300 hover:bg-indigo-600 transition cursor-pointer rounded-lg py-2 px-4 w-full hover:text-yellow-300">
+                                <i className="fas fa-arrow-left px-8 text-xl"></i>
+                            </button>
+
+                            <button onClick={handleActualizarTurno(1)} className="bg-indigo-500 border-2 hover:border-yellow-400 hover:ring-2 hover:ring-yellow-300 hover:bg-indigo-600 transition cursor-pointer rounded-lg py-2 px-4 w-full hover:text-yellow-300">
+                                <i className="fas fa-arrow-right px-8 text-xl"></i>
+                            </button>
+                        </div>
+                        <div className="flex justify-between items-center gap-2 bottom-6 left-0 right-2 w-fit max-w-600 m-auto "
                         >
                             <button onClick={handleActualizarTurno(-1)} className="bg-indigo-500 border-2 hover:border-yellow-400 hover:ring-2 hover:ring-yellow-300 hover:bg-indigo-600 transition cursor-pointer rounded-lg py-2 px-4 w-full hover:text-yellow-300">
                                 <i className="fas fa-arrow-left px-8 text-xl"></i>
