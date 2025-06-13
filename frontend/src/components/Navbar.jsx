@@ -152,7 +152,7 @@ export const Navbar = () => {
               className="py-2 flex items-center"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <img src={perfil.avatar} className="w-6 h-6 rounded-full border-2 bg-white border-white mr-1" /> Ver Perfil
+              <img src={perfil.avatar} className="w-6 h-6 rounded-full border-2 bg-white border-white mr-1 object-cover" /> Ver Perfil
             </NavLink>
             <button
               onClick={() => {

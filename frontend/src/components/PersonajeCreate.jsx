@@ -224,7 +224,7 @@ export const PersonajeCreate = () => {
                                     ? URL.createObjectURL(formData.imagen)
                                     : imagenDefault
                             }
-                            className="w-32 h-32 rounded-xl border-4 bg-gray-200"
+                            className="w-32 h-32 rounded-xl border-4 bg-gray-200 object-cover"
                             style={{ borderColor: formData.color_token }}
                         />
                         <div>
