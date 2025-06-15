@@ -7,7 +7,7 @@ export const Nota = ({
     nota, actualizarTipo, actualizarContenido, eliminarNota,
     onDragStart, onDragOver, onDragEnd, onDrop, isDragging, autoFocus, dungeonMaster
 }) => {
-    const TIEMPO_ACTUALIZACION = 1000; // 1 segundo
+    const TIEMPO_ACTUALIZACION = 2500; // 2 segundos y medio
 
     const [tipo, setTipo] = useState(nota.tipo);
     const [contenido, setContenido] = useState(nota.contenido);
